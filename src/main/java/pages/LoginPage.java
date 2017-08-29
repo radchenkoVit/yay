@@ -6,10 +6,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
 public class LoginPage {
-    public SelenideElement emailInput = $("#email");
-    public SelenideElement passwordInput = $("#login-pass");
-    public SelenideElement rememberMeCheckBox = $("#remember-me");
-    public SelenideElement signInButton = $(".btn-primary");
+    private SelenideElement emailInput = $("#email");
+    private SelenideElement passwordInput = $("#login-pass");
+    private SelenideElement rememberMeCheckBox = $("#remember-me");
+    private SelenideElement signInButton = $(".btn-primary");
 
 
 

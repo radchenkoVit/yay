@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
 
 public class MainAppPage {
-    public SelenideElement collectionWorkFlowTab =
+    private SelenideElement collectionWorkFlowTab =
             $x("//li[.//p[contains(text(), 'Collection Workflows')]]");
 
     public CollectionWorkflowPage navigateToCollectionWorkFlowPage(){
