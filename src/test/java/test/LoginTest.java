@@ -1,6 +1,7 @@
 package test;
 
 import blocks.ActionBlock;
+import blocks.EmailBlock;
 import blocks.subblocks.NotificationBlock;
 import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
@@ -41,8 +42,7 @@ public class LoginTest extends TestRunner {
 
         workflowPage
                 .hoverTo(CURRENT)
-                .clickOn(CALL)
-                .saveAction();
+                .clickOn(CALL);
 
         ActionBlock currentBlocks = new ActionBlock(CURRENT);
         //checks for for call block item
@@ -54,8 +54,7 @@ public class LoginTest extends TestRunner {
         ActionBlock overdueBlocks = new ActionBlock(OVERDUE);
         workflowPage
                 .hoverTo(OVERDUE)
-                .clickOn(EMAIL)
-                .saveAction();
+                .clickOn(EMAIL);
 
         overdueBlocks
                 .isBlock(callIconText)
@@ -69,8 +68,7 @@ public class LoginTest extends TestRunner {
                 .hoverTo(DELINQUENT)
                 .clickOn(EMAIL)
                 .hoverTo(DELINQUENT)
-                .clickOn(CALL)
-                .saveAction();
+                .clickOn(CALL);
 
         delinquentBlocks
                 .isBlock(callIconText)
@@ -78,6 +76,10 @@ public class LoginTest extends TestRunner {
                 .dateHasText(ninthyDays)
                 .creationTestHasText(1, daysDueText)
                 .dateHasText(1, ninthyDays);
+
+        delinquentBlocks.getEmailBlock()
+                .clickRepeatCheckBox()
+                .repeatDaysInputHasText("5");
 
         NotificationBlock notificationBlock = delinquentBlocks.getEmailBlock()
                 .addNotification();
@@ -90,6 +92,8 @@ public class LoginTest extends TestRunner {
         notificationBlock
                 .issueInput
                 .shouldHave(Condition.text("If last email wasn't opened"));
+
+        workflowPage.saveAction();
     }
 
 }

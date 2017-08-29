@@ -12,6 +12,7 @@ public class EmailBlock implements Block {
     private static String addActionsButton = ".//i[@class='material-icons'][contains(text(), 'add')]";
     private static String notificationMenuLocator = ".//i[@class='material-icons'][contains(text(), 'notifications_active')]";
     private static String repeatCheckBox = ".js-repeat";
+    private static String repeatDaysInput = ".sub.js-repeat-days.add-numbers-max";
 
     public EmailBlock(SelenideElement parent){
         this.parent = parent;
@@ -29,5 +30,9 @@ public class EmailBlock implements Block {
 
     public NotificationBlock getNotificationBlock(){
         return new NotificationBlock($(".sub-reminder.type-notif"));
+    }
+
+    public EmailBlock repeatDaysInputHasText(String expectedDays){
+        parent.$(repeatDaysInput).shouldHave(Condition.value(expectedDays)); return this;
     }
 }
