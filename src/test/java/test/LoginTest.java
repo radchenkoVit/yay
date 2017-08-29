@@ -19,6 +19,8 @@ public class LoginTest extends TestRunner {
     private String zeroDate = "0";
     private String desc1 = "days after creation date";
     private String desc2 = "days after due date";
+    private String callIconText = "phone";
+    private String emailIconText = "email";
 
     private String workFlowName = "Test Name for Work Flow";
 
@@ -42,7 +44,7 @@ public class LoginTest extends TestRunner {
 
         //checks for for call block item
         currentBlocks
-                .isBlock("phone")
+                .isBlock(callIconText)
                 .creationTestHasText(desc1)
                 .dateHasText(zeroDate);
 
@@ -53,7 +55,7 @@ public class LoginTest extends TestRunner {
                 .saveAction();
 
         overdueBlocks
-                //.isBlock("phone")
+                .isBlock(callIconText)
                 .creationTestHasText(desc2)
                 .dateHasText("1");
 
@@ -62,13 +64,13 @@ public class LoginTest extends TestRunner {
         //delique check
         workflowPage
                 .hoverTo(DELINQUENT)
-                .clickOn(CALL)
-                .hoverTo(DELINQUENT)
                 .clickOn(EMAIL)
+                .hoverTo(DELINQUENT)
+                .clickOn(CALL)
                 .saveAction();
 
         delinquentBlocks
-                //.isBlock("phone")
+                .isBlock(emailIconText)
                 .creationTestHasText(desc2)
                 .dateHasText("90")
                 .creationTestHasText(1, desc2)
