@@ -45,7 +45,7 @@ public class ActionBlock {
     }
 
     public EmailBlock getEmailBlock(int index){
-        SelenideElement block = parentMenu.$x(".//div[contains(@class, 'js-remainder-block')][.//i[@class='material-icons'][contains(text(), 'email')]]");
+        SelenideElement block = parentMenu.$x(".//div[contains(@class, 'js-remainder-block')][.//i[@class='material-icons'][contains(text(), 'email')]]", index);
         return new EmailBlock(block);
     }
 
@@ -54,7 +54,7 @@ public class ActionBlock {
     }
 
     public Block getCallBlock(int index){
-        SelenideElement block = parentMenu.$x(".//div[contains(@class, 'js-remainder-block')][.//i[@class='material-icons'][contains(text(), 'phone')]]");
+        SelenideElement block = parentMenu.$x(".//div[contains(@class, 'js-remainder-block')][.//i[@class='material-icons'][contains(text(), 'phone')]]", index);
         return new CallBlock(block);
     }
     //end getting blocks methods
