@@ -1,6 +1,7 @@
 package test;
 
 import blocks.ActionBlock;
+import blocks.subblocks.NotificationBlock;
 import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 import pages.CollectionWorkflowPage;
@@ -16,11 +17,14 @@ public class LoginTest extends TestRunner {
     private String email = "hnfbr@slipry.net";
     private String password = "1VN2IC";
 
-    private String zeroDate = "0";
-    private String desc1 = "days after creation date";
-    private String desc2 = "days after due date";
+    //days number
+    private String zeroDay = "0";
+    private String oneDay = "1";
+    private String ninthyDays = "90";
+
+    private String daysAfterText = "days after creation date";
+    private String daysDueText = "days after due date";
     private String callIconText = "phone";
-    private String emailIconText = "email";
 
     private String workFlowName = "Test Name for Work Flow";
 
@@ -41,12 +45,11 @@ public class LoginTest extends TestRunner {
                 .saveAction();
 
         ActionBlock currentBlocks = new ActionBlock(CURRENT);
-
         //checks for for call block item
         currentBlocks
                 .isBlock(callIconText)
-                .creationTestHasText(desc1)
-                .dateHasText(zeroDate);
+                .creationTestHasText(daysAfterText)
+                .dateHasText(zeroDay);
 
         ActionBlock overdueBlocks = new ActionBlock(OVERDUE);
         workflowPage
@@ -56,8 +59,8 @@ public class LoginTest extends TestRunner {
 
         overdueBlocks
                 .isBlock(callIconText)
-                .creationTestHasText(desc2)
-                .dateHasText("1");
+                .creationTestHasText(daysDueText)
+                .dateHasText(oneDay);
 
 
         ActionBlock delinquentBlocks = new ActionBlock(DELINQUENT);
@@ -70,11 +73,23 @@ public class LoginTest extends TestRunner {
                 .saveAction();
 
         delinquentBlocks
-                .isBlock(emailIconText)
-                .creationTestHasText(desc2)
-                .dateHasText("90")
-                .creationTestHasText(1, desc2)
-                .dateHasText(1, "90");
+                .isBlock(callIconText)
+                .creationTestHasText(daysDueText)
+                .dateHasText(ninthyDays)
+                .creationTestHasText(1, daysDueText)
+                .dateHasText(1, ninthyDays);
+
+        NotificationBlock notificationBlock = delinquentBlocks.getEmailBlock()
+                .addNotification();
+
+        //check days number
+        notificationBlock
+                    .withinDaysInput
+                    .shouldHave(Condition.value(oneDay));
+        //check text for issue input
+        notificationBlock
+                .issueInput
+                .shouldHave(Condition.text("If last email wasn't opened"));
     }
 
 }
