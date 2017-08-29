@@ -24,3 +24,4 @@ hs_err_pid*
 .target/
 yay_automation.iml
 /build/
+/target/

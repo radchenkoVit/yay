@@ -17,19 +17,19 @@ public class ActionBlock {
     }
 
     // commons methods for fast checking data in block
-    public ActionBlock dateHasText(String dateNumber){
-        return dateHasText(0, dateNumber); //first element
+    public ActionBlock dateInputHasText(String dateNumber){
+        return dateInputHasText(0, dateNumber); //first element
     }
 
-    public ActionBlock dateHasText(int index, String dateNumber){
+    public ActionBlock dateInputHasText(int index, String dateNumber){
         parentMenu.$(dateInput, index).shouldHave(Condition.exactValue(dateNumber)); return this;
     }
 
-    public ActionBlock creationTestHasText(String expectedText){
-        return creationTestHasText(0, expectedText); //first element
+    public ActionBlock creationDayInputHasText(String expectedText){
+        return creationDayInputHasText(0, expectedText); //first element
     }
 
-    public ActionBlock creationTestHasText(int index, String expectedText){
+    public ActionBlock creationDayInputHasText(int index, String expectedText){
         parentMenu.$x(issueCreationInput, index).shouldHave(Condition.text(expectedText)); return this;
     }
 

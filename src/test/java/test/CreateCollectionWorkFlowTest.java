@@ -48,8 +48,8 @@ public class CreateCollectionWorkFlowTest extends TestRunner {
         //checks for for call block item
         currentBlocks
                 .isBlock(callIconText)
-                .creationTestHasText(daysAfterText)
-                .dateHasText(zeroDay);
+                .creationDayInputHasText(daysAfterText)
+                .dateInputHasText(zeroDay);
 
         workflowPage
                 .hoverTo(OVERDUE)
@@ -58,8 +58,8 @@ public class CreateCollectionWorkFlowTest extends TestRunner {
         ActionBlock overdueBlocks = new ActionBlock(OVERDUE);
         overdueBlocks
                 .isBlock(callIconText)
-                .creationTestHasText(daysDueText)
-                .dateHasText(oneDay);
+                .creationDayInputHasText(daysDueText)
+                .dateInputHasText(oneDay);
 
 
         ActionBlock delinquentBlocks = new ActionBlock(DELINQUENT);
@@ -72,10 +72,10 @@ public class CreateCollectionWorkFlowTest extends TestRunner {
 
         delinquentBlocks
                 .isBlock(callIconText)
-                .creationTestHasText(daysDueText)
-                .dateHasText(ninetyDays)
-                .creationTestHasText(1, daysDueText)
-                .dateHasText(1, ninetyDays);
+                .creationDayInputHasText(daysDueText)
+                .dateInputHasText(ninetyDays)
+                .creationDayInputHasText(1, daysDueText)
+                .dateInputHasText(1, ninetyDays);
 
         delinquentBlocks.getEmailBlock()
                 .clickRepeatCheckBox()
