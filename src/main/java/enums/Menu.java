@@ -1,6 +1,8 @@
 package enums;
 
 import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public enum Menu {
@@ -12,7 +14,7 @@ public enum Menu {
         this.locator = locator;
     }
 
-
+    private static String commonParentLocatorPattern = ".js-remainder-%s-block";
     private static String commonlocatorPattern = "//ul[contains(@data-type, '%S')]";
 
     public SelenideElement get(){
@@ -21,5 +23,9 @@ public enum Menu {
 
     private String getLocator(){
         return locator;
+    }
+
+    public SelenideElement getParent(){
+        return $(String.format(commonParentLocatorPattern, getLocator().toLowerCase()));
     }
 }

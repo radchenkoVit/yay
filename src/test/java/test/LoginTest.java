@@ -1,5 +1,6 @@
 package test;
 
+import blocks.ActionBlock;
 import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 import pages.CollectionWorkflowPage;
@@ -14,6 +15,9 @@ public class LoginTest extends TestRunner {
     private String email = "hnfbr@slipry.net";
     private String password = "1VN2IC";
 
+    private String zeroDate = "0";
+    private String desc1 = "days after creation date";
+    private String desc2 = "days after due date";
 
     private String workFlowName = "Test Name for Work Flow";
 
@@ -30,7 +34,18 @@ public class LoginTest extends TestRunner {
 
         workflowPage
                 .hoverTo(CURRENT)
-                .clickOn(CALL);
+                .clickOn(CALL)
+                .saveAction();
+
+        ActionBlock currentBlocks = new ActionBlock(CURRENT);
+
+        //checks for for call block otem
+        currentBlocks
+                .isBlock("phone")
+                .creationTestHasText(desc1)
+                .dateHasText(zeroDate);
+
+
     }
 
 }

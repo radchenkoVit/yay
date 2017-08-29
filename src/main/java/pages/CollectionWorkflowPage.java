@@ -24,8 +24,8 @@ public class CollectionWorkflowPage {
     private SelenideElement workFlowInput = $x("//div[contains(@class, 'js-template-name')]/input");
     private SelenideElement floppyDiskIcon = $("i.js-save-template-name");
 
-    private SelenideElement creationMenuTab = $x("//ul[contains(@data-type, 'CREATION')]");
-    private static String commonLocator = "//li[@data-type='CALL']";
+    private SelenideElement saveActionButton = $(".js-save-template-btn");
+    private SelenideElement cancelActionButton = $("js-cancel-template-btn");
 
     public CollectionWorkflowPage createNewWorkFlow(){
         newWorkFlowButton.click(); return this;
@@ -54,5 +54,13 @@ public class CollectionWorkflowPage {
                 .waitUntil(Condition.visible, 5000)
                 .click();
         return this;
+    }
+
+    public CollectionWorkflowPage saveAction(){
+        saveActionButton.click(); return this;
+    }
+
+    public CollectionWorkflowPage cancelAction(){
+        cancelActionButton.click(); return this;
     }
 }
