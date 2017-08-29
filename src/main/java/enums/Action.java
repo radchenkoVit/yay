@@ -6,7 +6,7 @@ public enum Action {
     Action(){
     }
 
-    private static String commonLocatorPattern = "//li[@data-type='%S']";
+    private static String commonLocatorPattern = ".//li[@data-type='%S']";
 
     public String getLocator(){
         return String.format(commonLocatorPattern, name());

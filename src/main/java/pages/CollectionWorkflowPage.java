@@ -41,11 +41,12 @@ public class CollectionWorkflowPage {
     }
 
     public CollectionWorkflowPage hoverTo(Menu menu){
-        Selenide.sleep(3000);
-        currentMenuTab = menu.get() // here we save state of the page
-                .waitUntil(Condition.visible, 5000)
-                .hover();
+        Selenide.sleep(1500); // little bit of hardcode
+        menu.get() // here we save state of the page
+            .waitUntil(Condition.visible, 5000)
+            .hover();
 
+        currentMenuTab = menu.get();
         return this;
     }
 

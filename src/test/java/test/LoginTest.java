@@ -8,7 +8,8 @@ import pages.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static enums.Action.CALL;
-import static enums.Menu.CURRENT;
+import static enums.Action.EMAIL;
+import static enums.Menu.*;
 
 public class LoginTest extends TestRunner {
     private String baseUrl = "https://www.demo.yaypay.com/app/login";
@@ -39,13 +40,39 @@ public class LoginTest extends TestRunner {
 
         ActionBlock currentBlocks = new ActionBlock(CURRENT);
 
-        //checks for for call block otem
+        //checks for for call block item
         currentBlocks
                 .isBlock("phone")
                 .creationTestHasText(desc1)
                 .dateHasText(zeroDate);
 
+        ActionBlock overdueBlocks = new ActionBlock(OVERDUE);
+        workflowPage
+                .hoverTo(OVERDUE)
+                .clickOn(EMAIL)
+                .saveAction();
 
+        overdueBlocks
+                //.isBlock("phone")
+                .creationTestHasText(desc2)
+                .dateHasText("1");
+
+
+        ActionBlock delinquentBlocks = new ActionBlock(DELINQUENT);
+        //delique check
+        workflowPage
+                .hoverTo(DELINQUENT)
+                .clickOn(CALL)
+                .hoverTo(DELINQUENT)
+                .clickOn(EMAIL)
+                .saveAction();
+
+        delinquentBlocks
+                //.isBlock("phone")
+                .creationTestHasText(desc2)
+                .dateHasText("90")
+                .creationTestHasText(1, desc2)
+                .dateHasText(1, "90");
     }
 
 }
