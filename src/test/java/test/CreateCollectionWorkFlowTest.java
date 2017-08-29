@@ -1,7 +1,6 @@
 package test;
 
 import blocks.ActionBlock;
-import blocks.EmailBlock;
 import blocks.subblocks.NotificationBlock;
 import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
@@ -13,7 +12,7 @@ import static enums.Action.CALL;
 import static enums.Action.EMAIL;
 import static enums.Menu.*;
 
-public class LoginTest extends TestRunner {
+public class CreateCollectionWorkFlowTest extends TestRunner {
     private String baseUrl = "https://www.demo.yaypay.com/app/login";
     private String email = "hnfbr@slipry.net";
     private String password = "1VN2IC";
@@ -21,7 +20,8 @@ public class LoginTest extends TestRunner {
     //days number
     private String zeroDay = "0";
     private String oneDay = "1";
-    private String ninthyDays = "90";
+    private String fiveDays = "5";
+    private String ninetyDays = "90";
 
     private String daysAfterText = "days after creation date";
     private String daysDueText = "days after due date";
@@ -30,7 +30,7 @@ public class LoginTest extends TestRunner {
     private String workFlowName = "Test Name for Work Flow";
 
     @Test
-    public void test(){
+    public void createMainCollections(){
         CollectionWorkflowPage workflowPage = open(baseUrl, LoginPage.class)
                                                 .login(email, password)
                                                 .navigateToCollectionWorkFlowPage();
@@ -38,7 +38,7 @@ public class LoginTest extends TestRunner {
         workflowPage
                 .createNewWorkFlow()
                 .editWorkFlowName(workFlowName)
-                .workFlowNameDiv.should(Condition.text(workFlowName));
+                .workFlowNameDiv.shouldHave(Condition.text(workFlowName));
 
         workflowPage
                 .hoverTo(CURRENT)
@@ -51,11 +51,11 @@ public class LoginTest extends TestRunner {
                 .creationTestHasText(daysAfterText)
                 .dateHasText(zeroDay);
 
-        ActionBlock overdueBlocks = new ActionBlock(OVERDUE);
         workflowPage
                 .hoverTo(OVERDUE)
                 .clickOn(EMAIL);
 
+        ActionBlock overdueBlocks = new ActionBlock(OVERDUE);
         overdueBlocks
                 .isBlock(callIconText)
                 .creationTestHasText(daysDueText)
@@ -63,7 +63,7 @@ public class LoginTest extends TestRunner {
 
 
         ActionBlock delinquentBlocks = new ActionBlock(DELINQUENT);
-        //delique check
+        //delique block check
         workflowPage
                 .hoverTo(DELINQUENT)
                 .clickOn(EMAIL)
@@ -73,13 +73,13 @@ public class LoginTest extends TestRunner {
         delinquentBlocks
                 .isBlock(callIconText)
                 .creationTestHasText(daysDueText)
-                .dateHasText(ninthyDays)
+                .dateHasText(ninetyDays)
                 .creationTestHasText(1, daysDueText)
-                .dateHasText(1, ninthyDays);
+                .dateHasText(1, ninetyDays);
 
         delinquentBlocks.getEmailBlock()
                 .clickRepeatCheckBox()
-                .repeatDaysInputHasText("5");
+                .repeatDaysInputHasText(fiveDays);
 
         NotificationBlock notificationBlock = delinquentBlocks.getEmailBlock()
                 .addNotification();

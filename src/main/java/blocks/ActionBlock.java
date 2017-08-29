@@ -11,8 +11,6 @@ public class ActionBlock {
     private String dateInput = ".js-reminder-input.add-numbers-max";
     private String issueCreationInput = ".//div[@class='wrapper']/div[@class='over']/span[last()]";
     private String iconElement = "(//div[contains(@class, 'card-block')]//i[@class='material-icons'])[1]";
-    private String repeatCheckBox = ".js-repeat";
-    private String addActionsButton = ".//i[@class='material-icons'][contains(text(), 'add')]";
 
     public ActionBlock(Menu menu){
         parentMenu = menu.getParent();
